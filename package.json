@@ -1,6 +1,6 @@
 {
 	"name": "not-monitor",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "not-* family monitoring util",
 	"main": "index.js",
 	"scripts": {

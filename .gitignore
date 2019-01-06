@@ -1,4 +1,6 @@
 npm-debug.log*
 node_modules/
 coverage/
-log.*
+docs/
+package-lock.json
+.nyc_output

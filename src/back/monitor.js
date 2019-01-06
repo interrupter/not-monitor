@@ -48,7 +48,7 @@ class notMonitor extends EventEmitter{
 			size: diskRaw.size,
 			used: diskRaw.used,
 			avail: diskRaw.avail,
-			usage: diskRaw.pcent
+			usage: Math.round(diskRaw.used/diskRaw.size*100)
 		};
 		this.emit('afterMeasure', this.measures);
 	}
