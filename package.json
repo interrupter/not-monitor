@@ -1,6 +1,6 @@
 {
 	"name": "not-monitor",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "not-* family monitoring util",
 	"main": "index.js",
 	"scripts": {
@@ -30,6 +30,7 @@
 	},
 	"devDependencies": {
 		"eslint": "*",
+		"nyc": "*",
 		"chai": "*",
 		"mocha": "*",
 		"ink-docstrap": "^1.3.2",

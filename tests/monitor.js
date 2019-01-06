@@ -4,10 +4,22 @@ const expect = require('chai').expect,
 describe("monitor", function() {
 	it("defined and afterMeasure woken", function(done){
 		expect(monitor).to.be.not.null;
-		monitor.on('afterMeasure', (data)=>{
+		function after(data){
 			expect(data).to.be.not.null;
-			monitor.kill();
+			monitor.off('afterMeasure',after);
 			done();
-		});
+		}
+		monitor.on('afterMeasure', after);
 	});
+	it("status", function(){
+		let status = monitor.status();
+		expect(status).to.be.not.null;
+	});
+	it("start again", function(){
+		monitor.start();
+	});
+	it("kill", function(){
+		monitor.kill();
+	});
+
 });
