@@ -1,0 +1,73 @@
+{
+	"name": "not-monitor",
+	"version": "0.0.1",
+	"description": "not-* family monitoring util",
+	"main": "index.js",
+	"scripts": {
+		"test": "NOT_MONITOR_INTERVAL=100 ./node_modules/.bin/mocha --reporter spec ./tests/**/**/**/**.js",
+		"lint": "./node_modules/.bin/eslint ./src/**/**/**/**.js --fix",
+		"pretest": "npm run lint",
+		"docs": "./node_modules/.bin/jsdoc -c jsdoc.json",
+		"cover": "nyc npm test"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/interrupter/not-monitor.git"
+	},
+	"keywords": [
+		"not-framework",
+		"not-node",
+		"monitor"
+	],
+	"author": "interrupter <alex.repin@mail.ru> (http://github.com/interrupter)",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/interrupter/not-monitor/issues"
+	},
+	"homepage": "https://github.com/interrupter/not-monitor#readme",
+	"dependencies": {
+		"@dropb/diskinfo": "^1.0.4"
+	},
+	"devDependencies": {
+		"eslint": "*",
+		"chai": "*",
+		"mocha": "*",
+		"ink-docstrap": "^1.3.2",
+		"jsdoc": "^3.5.5"
+	},
+	"nyc": {
+		"include": [
+			"src/**/**/**.js"
+		],
+		"exclude": [
+			"tests/**/**/**/**.js"
+		],
+		"reporter": [
+			"html"
+		],
+		"check-coverage": false,
+		"per-file": true,
+		"lines": 99,
+		"statements": 99,
+		"functions": 99,
+		"branches": 99,
+		"watermarks": {
+			"lines": [
+				80,
+				95
+			],
+			"functions": [
+				80,
+				95
+			],
+			"branches": [
+				80,
+				95
+			],
+			"statements": [
+				80,
+				95
+			]
+		}
+	}
+}
