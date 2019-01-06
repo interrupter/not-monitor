@@ -1,10 +1,10 @@
 {
 	"name": "not-monitor",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "not-* family monitoring util",
 	"main": "index.js",
 	"scripts": {
-		"test": "NOT_MONITOR_INTERVAL=100 ./node_modules/.bin/mocha --reporter spec ./tests/**/**/**/**.js",
+		"test": "NOT_MONITOR_REPORT_URL='http://reporter.local/api/monitor' NOT_MONITOR_INTERVAL=100 ./node_modules/.bin/mocha --reporter spec ./tests/**/**/**/**.js",
 		"lint": "./node_modules/.bin/eslint ./src/**/**/**/**.js --fix",
 		"pretest": "npm run lint",
 		"docs": "./node_modules/.bin/jsdoc -c jsdoc.json",
@@ -26,7 +26,8 @@
 	},
 	"homepage": "https://github.com/interrupter/not-monitor#readme",
 	"dependencies": {
-		"@dropb/diskinfo": "^1.0.4"
+		"@dropb/diskinfo": "^1.0.4",
+		"request": "*"
 	},
 	"devDependencies": {
 		"eslint": "*",

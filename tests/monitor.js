@@ -11,13 +11,16 @@ describe("monitor", function() {
 		}
 		monitor.on('afterMeasure', after);
 	});
+	
 	it("status", function(){
 		let status = monitor.status();
 		expect(status).to.be.not.null;
 	});
+
 	it("start again", function(){
 		monitor.start();
 	});
+
 	it("kill", function(){
 		monitor.kill();
 	});

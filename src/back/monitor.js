@@ -1,10 +1,15 @@
 const { diskinfo } = require('@dropb/diskinfo');
 const EventEmitter = require('events');
+const request = require('request');
 /**
 * @module not-monitor
 */
-const STANDART_INTERVAL = 5000;
+const STANDART_INTERVAL = 5000;	//in ms
+const STANDART_REPORT_INTERVAL = 60;//in seconds
 const INTERVAL = parseInt(process.env.NOT_MONITOR_INTERVAL) || STANDART_INTERVAL;
+const REPORT_URL = process.env.NOT_MONITOR_REPORT_URL;
+const REPORT_KEY = process.env.NOT_MONITOR_REPORT_KEY;
+const REPORT_INTERVAL = parseInt(process.env.NOT_MONITOR_REPORT_INTERVAL) || STANDART_REPORT_INTERVAL;
 
 class notMonitor extends EventEmitter{
 	constructor(){
@@ -14,6 +19,11 @@ class notMonitor extends EventEmitter{
 	}
 
 	start(){
+		this.startMeasuring();
+		this.startReporting();
+	}
+
+	startMeasuring(){
 		this.measures = {
 			pid: process.pid,
 			platform: process.platform,
@@ -25,10 +35,10 @@ class notMonitor extends EventEmitter{
 			}
 		};
 		this.cpuPrev = process.cpuUsage();
-		if(this.int){
-			clearInterval(this.int);
+		if(this.intMeasuring){
+			clearInterval(this.intMeasuring);
 		}
-		this.int = setInterval(this.measure.bind(this), INTERVAL);
+		this.intMeasuring = setInterval(this.measure.bind(this), INTERVAL);
 	}
 
 	async measure(){
@@ -58,7 +68,35 @@ class notMonitor extends EventEmitter{
 	}
 
 	kill(){
-		clearInterval(this.int);
+		clearInterval(this.intMeasuring);
+		clearInterval(this.intReporting);
+	}
+
+	startReporting(){
+		if (this.intReporting){
+			clearInterval(this.intReporting);
+		}
+		if(typeof REPORT_URL !== 'undefined' && REPORT_URL.length > 10){
+			this.intReporting = setInterval(this.report.bind(this), REPORT_INTERVAL*1000);
+		}
+	}
+
+	report(){
+		let data = {
+			key: REPORT_KEY,
+			report:this.measures
+		};
+		request({
+			url: REPORT_URL,
+			method: 'POST',
+			json: data
+		}, (err)=>{
+			if(err){
+				this.emit('afterReportError', err);
+			}else{
+				this.emit('afterReportSuccess');
+			}
+		});
 	}
 }
 const INSTANCE = new notMonitor();
