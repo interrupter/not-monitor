@@ -6,10 +6,10 @@ const request = require('request');
 */
 const STANDART_INTERVAL = 5000;	//in ms
 const STANDART_REPORT_INTERVAL = 60;//in seconds
-const INTERVAL = parseInt(process.env.NOT_MONITOR_INTERVAL) || STANDART_INTERVAL;
-const REPORT_URL = process.env.NOT_MONITOR_REPORT_URL;
-const REPORT_KEY = process.env.NOT_MONITOR_REPORT_KEY;
-const REPORT_INTERVAL = parseInt(process.env.NOT_MONITOR_REPORT_INTERVAL) || STANDART_REPORT_INTERVAL;
+const INTERVAL = parseInt(process.env.NOT_NODE_MONITOR_INTERVAL) || STANDART_INTERVAL;
+const REPORT_URL = process.env.NOT_NODE_MONITOR_REPORT_URL;
+const REPORT_KEY = process.env.NOT_NODE_MONITOR_REPORT_KEY;
+const REPORT_INTERVAL = parseInt(process.env.NOT_NODE_MONITOR_REPORT_INTERVAL) || STANDART_REPORT_INTERVAL;
 
 class notMonitor extends EventEmitter{
 	constructor(){

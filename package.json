@@ -1,10 +1,10 @@
 {
 	"name": "not-monitor",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "not-* family monitoring util",
 	"main": "index.js",
 	"scripts": {
-		"test": "NOT_MONITOR_REPORT_URL='http://reporter.local/api/monitor' NOT_MONITOR_INTERVAL=100 ./node_modules/.bin/mocha --reporter spec ./tests/**/**/**/**.js",
+		"test": "NOT_NODE_MONITOR_REPORT_URL='http://reporter.local/api/monitor' NOT_NODE_MONITOR_INTERVAL=100 ./node_modules/.bin/mocha --reporter spec ./tests/**/**/**/**.js",
 		"lint": "./node_modules/.bin/eslint ./src/**/**/**/**.js --fix",
 		"pretest": "npm run lint",
 		"docs": "./node_modules/.bin/jsdoc -c jsdoc.json",
