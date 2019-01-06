@@ -90,9 +90,9 @@ class notMonitor extends EventEmitter{
 			url: REPORT_URL,
 			method: 'POST',
 			json: data
-		}, (err)=>{
-			if(err){
-				this.emit('afterReportError', err);
+		}, (err,r)=>{
+			if(err || r.statusCode!== 200){
+				this.emit('afterReportError', err, r);
 			}else{
 				this.emit('afterReportSuccess');
 			}
