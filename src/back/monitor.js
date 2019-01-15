@@ -88,7 +88,7 @@ class notMonitor extends EventEmitter{
 		};
 		request({
 			url: REPORT_URL,
-			method: 'POST',
+			method: 'PUT',
 			json: data
 		}, (err,r)=>{
 			if(err || r.statusCode!== 200){
