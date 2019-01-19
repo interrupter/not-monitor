@@ -58,7 +58,7 @@ class notMonitor extends EventEmitter{
 			size: diskRaw.size,
 			used: diskRaw.used,
 			avail: diskRaw.avail,
-			usage: Math.round(diskRaw.used/diskRaw.size*100)
+			usage: Math.round(diskRaw.used / diskRaw.size * 100)
 		};
 		this.emit('afterMeasure', this.measures);
 	}
@@ -83,8 +83,9 @@ class notMonitor extends EventEmitter{
 
 	report(){
 		let data = {
-			key: REPORT_KEY,
-			report:this.measures
+			key: 	REPORT_KEY,
+			type: 	'monitor',
+			report:	this.measures
 		};
 		request({
 			url: REPORT_URL,
