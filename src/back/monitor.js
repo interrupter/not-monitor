@@ -54,13 +54,17 @@ class notMonitor extends EventEmitter{
 		this.measures.cpu = Math.round((cpuRaw.user + cpuRaw.system) / (INTERVAL * 10));
 		//disk
 		let diskRaw =  await diskinfo('./');
-		this.measures.disk = {
-			size: diskRaw.size,
-			used: diskRaw.used,
-			avail: diskRaw.avail,
-			usage: Math.round(diskRaw.used / diskRaw.size * 100)
-		};
-		this.emit('afterMeasure', this.measures);
+		if(diskRaw){
+			this.measures.disk = {
+				size: diskRaw.size,
+				used: diskRaw.used,
+				avail: diskRaw.avail,
+				usage: Math.round(diskRaw.used / diskRaw.size * 100)
+			};
+			this.emit('afterMeasure', this.measures);
+		}else{
+			this.emit('emptyDiskProbeResult');
+		}
 	}
 
 	status(){
