@@ -91,13 +91,15 @@ class notMonitor extends EventEmitter{
 			type: 	'monitor',
 			report:	this.measures
 		};
-		request({
+		let req = {
 			url: REPORT_URL,
 			method: 'PUT',
 			json: data
-		}, (err,r)=>{
-			if(err || r.statusCode!== 200){
-				this.emit('afterReportError', err, data);
+		};
+		request(req, (err,r)=>{
+			if(err || r.statusCode !== 200){
+				delete req.json.key;
+				this.emit('afterReportError', {req, err});
 			}else{
 				this.emit('afterReportSuccess');
 			}
